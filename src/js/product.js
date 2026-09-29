@@ -11,6 +11,7 @@ function addProductToCart(product) {
     getArray.push(product);
     setLocalStorage("so-cart", getArray);
   }
+  animateCart();
 }
 
 // add to cart button event handler
@@ -23,3 +24,16 @@ async function addToCartHandler(e) {
 document
   .getElementById("addToCart")
   .addEventListener("click", addToCartHandler);
+
+// cart animation when user add a product to cart
+async function animateCart() {
+  const cart = document.querySelector(".cart");
+  cart.classList.add("cart-animation");
+  cart.addEventListener(
+    "animationend",
+    () => {
+      cart.classList.remove("cart-animation");
+    },
+    { once: true },
+  );
+}
