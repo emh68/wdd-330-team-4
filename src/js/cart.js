@@ -7,6 +7,17 @@ function renderCartContents() {
       "<p>Your cart is empty</p>";
     return;
   }
+  const cartFooter = document.querySelector(".cart-footer");
+  cartFooter.classList.remove("hide");
+
+  let total = 0;
+  for (const item of cartItems) {
+    total += item.FinalPrice;
+  }
+
+  const cartTotal = document.querySelector(".cart-total");
+  cartTotal.textContent = `Total: $${total}`;
+
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
 }
