@@ -50,12 +50,25 @@ async function animateCart() {
 }
 
 export default async function productDetails(productId) {
-  product = await findProductById(productId);
+  const productSection = document.querySelector(".product-detail");
 
-  renderProductDetails(product);
+  try {
+    product = await findProductById(productId);
 
-  // add listener to Add to Cart button
-  document
-  .getElementById("addToCart")
-  .addEventListener("click", addToCartHandler);
+    if (!product) {
+      throw new Error("Product not found.");
+    }
+
+    renderProductDetails(product);
+    productSection.hidden = false;
+
+    // add listener to Add to Cart button
+    document
+      .getElementById("addToCart")
+      .addEventListener("click", addToCartHandler);
+
+  } catch (err) {
+    productSection.innerHTML = `<p>${err.message}</p>`;
+    productSection.hidden = false;
+  }
 }
