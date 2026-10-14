@@ -6,3 +6,10 @@ const category = "tents";
 
 productList(selector, category);
 loadHeaderFooter();
+
+const newsletterForm = document.querySelector("#newsletter-form");
+
+newsletterForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  alert("Newsletter subscriptions are not available yet.");
+});
