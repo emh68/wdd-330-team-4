@@ -1,4 +1,5 @@
 import { getData } from "./productData.mjs";
+import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
   return `<li class="product-card">
@@ -12,21 +13,17 @@ function productCardTemplate(product) {
         </li>`;
 }
 
-function renderList(list, selector) {
-  //filtering wanted tents
+function filterProducts(list) {
   const wantedIds = ["880RR", "985RF", "985PR", "344YJ"];
-  const filteredProducts = list.filter((product) => {
-    return wantedIds.includes(product.Id);
-  });
-  //call the template function once for each product in our list,
-  const liHtml = filteredProducts.map((item) => {
-    return productCardTemplate(item);
-  });
-  selector.innerHTML = liHtml.join("");
+  return list.filter((product) => wantedIds.includes(product.Id));
 }
 
 export default async function productList(selector, category) {
-  const jsonProductList = await getData(category);
-  const element = document.querySelector(selector);
-  renderList(jsonProductList, element);
+  // get the element we will insert the list into from the selector
+  const el = document.querySelector(selector);
+  // get the list of products
+  const products = await getData(category);
+  // render out the product list to the element
+  const filteredProducts = filterProducts(products);
+  renderListWithTemplate(productCardTemplate, el, filteredProducts);
 }
