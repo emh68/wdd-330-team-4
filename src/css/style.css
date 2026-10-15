@@ -100,6 +100,52 @@ button {
 }
 /* End utility classes */
 
+/* Newsletter signup */
+.newsletter {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.newsletter h2 {
+  margin-top: 0;
+}
+
+#newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#newsletter-form label {
+  margin: 0;
+}
+
+#newsletter-email {
+  padding: 0.65rem;
+  min-width: 200px;
+  max-width: 300px;
+  border: 1px solid #888;
+  border-radius: 8px;
+}
+
+#newsletter-form label {
+  margin: 0;
+}
+
+#newsletter-form button {
+  width: auto;
+  margin: 0;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+/* End Newsletter signup classes */
+
 /* Cart icon styles */
 .cart {
   padding-top: 1em;
