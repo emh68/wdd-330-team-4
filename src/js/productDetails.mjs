@@ -1,5 +1,6 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
+import { cartSuperscript } from "./cartSuperscript.mjs";
 
 let product = {};
 
@@ -14,6 +15,7 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", getArray);
   }
   animateCart();
+  cartSuperscript();
 }
 
 // add to cart button event handler
@@ -66,7 +68,6 @@ export default async function productDetails(productId) {
     document
       .getElementById("addToCart")
       .addEventListener("click", addToCartHandler);
-
   } catch (err) {
     productSection.innerHTML = `<p>${err.message}</p>`;
     productSection.hidden = false;

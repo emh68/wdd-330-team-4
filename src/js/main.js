@@ -5,7 +5,12 @@ const selector = ".product-list";
 const category = "tents";
 
 productList(selector, category);
-loadHeaderFooter();
+
+async function init() {
+  await loadHeaderFooter();
+}
+
+init();
 
 const newsletterForm = document.querySelector("#newsletter-form");
 

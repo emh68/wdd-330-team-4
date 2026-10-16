@@ -1,3 +1,4 @@
+import { cartSuperscript } from "./cartSuperscript.mjs";
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { loadHeaderFooter } from "./utils.mjs";
 
@@ -44,6 +45,7 @@ function removeProduct(event) {
 
   setLocalStorage("so-cart", cartItems);
   renderCartContents();
+  cartSuperscript();
 }
 
 function cartItemTemplate(item) {

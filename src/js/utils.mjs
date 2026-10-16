@@ -1,3 +1,4 @@
+import { cartSuperscript } from "./cartSuperscript.mjs";
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -26,7 +27,6 @@ export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
-
 }
 
 export function renderListWithTemplate(
@@ -34,7 +34,7 @@ export function renderListWithTemplate(
   parentElement,
   list,
   position = "afterbegin",
-  clear = true
+  clear = true,
 ) {
   if (clear) {
     parentElement.innerHTML = "";
@@ -49,7 +49,7 @@ export async function renderWithTemplate(
   data,
   callback,
   position = "afterbegin",
-  clear = true
+  clear = true,
 ) {
   const template = await templateFn(data);
 
@@ -65,16 +65,16 @@ export async function renderWithTemplate(
 }
 
 function loadTemplate(path) {
-    // wait what?  we are returning a new function? 
-    // this is called currying and can be very helpful.
-    return async function () {
-        const res = await fetch(path);
-        if (res.ok) {
-        const html = await res.text();
-        return html;
-        }
-    };
-} 
+  // wait what?  we are returning a new function?
+  // this is called currying and can be very helpful.
+  return async function () {
+    const res = await fetch(path);
+    if (res.ok) {
+      const html = await res.text();
+      return html;
+    }
+  };
+}
 
 export async function loadHeaderFooter() {
   const headerTemplateFn = loadTemplate("/partials/header.html");
@@ -85,6 +85,8 @@ export async function loadHeaderFooter() {
 
   await Promise.all([
     renderWithTemplate(headerTemplateFn, headerEl),
-    renderWithTemplate(footerTemplateFn, footerEl)
+    renderWithTemplate(footerTemplateFn, footerEl),
   ]);
+
+  cartSuperscript();
 }

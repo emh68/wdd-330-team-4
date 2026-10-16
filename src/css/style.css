@@ -160,6 +160,18 @@ button {
   fill: gray;
 }
 
+.cart-count {
+  position: absolute;
+  top: -1px;
+  right: -10px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  padding: 2px 5px;
+  font-weight: bold;
+}
+
 @keyframes cartJump {
   0% {
     transform: translateY(0);
