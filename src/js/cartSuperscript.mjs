@@ -1,15 +1,21 @@
 import { getLocalStorage } from "./utils.mjs";
 
-export async function cartSuperscript() {
+export function cartSuperscript() {
   const cart = document.querySelector(".cart");
+
+  if (!cart) {
+    console.warn("Cart element not found");
+    return;
+  }
+
   let span = cart.querySelector(".cart-count");
   const items = getLocalStorage("so-cart") || [];
-  const itemCount = items.length;
-  console.log(itemCount);
+
   if (!span) {
     span = document.createElement("span");
     span.classList.add("cart-count");
     cart.appendChild(span);
   }
+
   span.textContent = items.length;
 }
