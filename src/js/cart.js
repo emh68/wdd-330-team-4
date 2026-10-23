@@ -18,7 +18,7 @@ function renderCartContents() {
 
   let total = 0;
   for (const item of cartItems) {
-    total += item.FinalPrice;
+    total += item.FinalPrice * item.quantity;
   }
 
   const cartTotal = document.querySelector(".cart-total");
@@ -60,13 +60,53 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <div class="cart-card__quantity">
+    <button class="quantity-decrease" data-id="${item.Id}">-</button>
+    <span>Quantity: ${item.quantity || 1}</span>
+    <button class="quantity-increase" data-id="${item.Id}">+</button>
+  </div>
+  <p class="cart-card__price">$${item.FinalPrice * item.quantity.toFixed(2)}</p>
   <span class="cart-remove" data-id="${item.Id}">X</span>
 </li>`;
 
   return newItem;
 }
 
+function updateProductQuantity(productId, change) {
+  const cartItems = getLocalStorage("so-cart") || [];
+
+  const product = cartItems.find((item) => item.Id === productId);
+
+  if (!product) return;
+
+  product.quantity = (product.quantity || 1) + change;
+
+  // Don't allow quantities below 1
+  if (product.quantity < 1) {
+    product.quantity = 1;
+  }
+
+  setLocalStorage("so-cart", cartItems);
+
+  renderCartContents();
+  cartSuperscript();
+}
+
+function handleQuantityChange(event) {
+  const increaseButton = event.target.closest(".quantity-increase");
+  const decreaseButton = event.target.closest(".quantity-decrease");
+
+  if (increaseButton) {
+    updateProductQuantity(increaseButton.dataset.id, 1);
+  }
+
+  if (decreaseButton) {
+    updateProductQuantity(decreaseButton.dataset.id, -1);
+  }
+}
+
 renderCartContents();
+document
+  .querySelector(".product-list")
+  .addEventListener("click", handleQuantityChange);
 loadHeaderFooter();

@@ -17,5 +17,9 @@ export function cartSuperscript() {
     cart.appendChild(span);
   }
 
-  span.textContent = items.length;
+  let totalItems = 0;
+  items.forEach((item) => {
+    totalItems += item.quantity || 0;
+  });
+  span.textContent = totalItems;
 }
