@@ -1,5 +1,6 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
+import { cartSuperscript } from "./cartSuperscript.mjs";
 
 let product = {};
 
@@ -14,6 +15,7 @@ function addProductToCart(product) {
     setLocalStorage("so-cart", getArray);
   }
   animateCart();
+  cartSuperscript();
 }
 
 // add to cart button event handler
@@ -26,7 +28,7 @@ function renderProductDetails(product) {
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =
     product.NameWithoutBrand;
-  document.querySelector("#productImage").src = product.Image;
+  document.querySelector("#productImage").src = product.Images.PrimaryLarge;
   document.querySelector("#productImage").alt = product.Name;
   document.querySelector("#productFinalPrice").innerText = product.FinalPrice;
   document.querySelector("#productColorName").innerText =
@@ -66,7 +68,6 @@ export default async function productDetails(productId) {
     document
       .getElementById("addToCart")
       .addEventListener("click", addToCartHandler);
-
   } catch (err) {
     productSection.innerHTML = `<p>${err.message}</p>`;
     productSection.hidden = false;
