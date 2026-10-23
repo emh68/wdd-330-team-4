@@ -25,6 +25,13 @@ async function addToCartHandler(e) {
 }
 
 function renderProductDetails(product) {
+    const breadcrumb = document.querySelector(".breadcrumbs");
+
+  if (breadcrumb) {
+    const categoryName = product.Category.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    breadcrumb.textContent = categoryName;
+  }
+  
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =
     product.NameWithoutBrand;
