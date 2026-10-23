@@ -18,7 +18,7 @@ function renderCartContents() {
 
   let total = 0;
   for (const item of cartItems) {
-    total += item.FinalPrice;
+    total += item.FinalPrice * item.quantity;
   }
 
   const cartTotal = document.querySelector(".cart-total");
@@ -60,8 +60,8 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
+  <p class="cart-card__quantity"> Quantity= ${item.quantity}</p>
+  <p class="cart-card__price">$${item.FinalPrice * item.quantity}</p>
   <span class="cart-remove" data-id="${item.Id}">X</span>
 </li>`;
 
