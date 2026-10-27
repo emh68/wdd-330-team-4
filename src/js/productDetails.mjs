@@ -5,17 +5,31 @@ import { cartSuperscript } from "./cartSuperscript.mjs";
 let product = {};
 
 function addProductToCart(product) {
-  const getArray = getLocalStorage("so-cart");
-  if (!getArray) {
+  const cart = getLocalStorage("so-cart");
+  if (!cart) {
     const newArray = [];
+    product.quantity = 1;
     newArray.push(product);
     setLocalStorage("so-cart", newArray);
   } else {
-    getArray.push(product);
-    setLocalStorage("so-cart", getArray);
+    const existingProduct = findProductInCart(cart, product.Id);
+
+    if (existingProduct) {
+      existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+    } else {
+      product.quantity = 1;
+      cart.push(product);
+    }
+
+    setLocalStorage("so-cart", cart);
   }
   animateCart();
   cartSuperscript();
+  console.log(cart);
+}
+
+function findProductInCart(cart, productId) {
+  return cart.find((item) => item.Id === productId);
 }
 
 // add to cart button event handler
@@ -25,13 +39,15 @@ async function addToCartHandler(e) {
 }
 
 function renderProductDetails(product) {
-    const breadcrumb = document.querySelector(".breadcrumbs");
+  const breadcrumb = document.querySelector(".breadcrumbs");
 
   if (breadcrumb) {
-    const categoryName = product.Category.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    const categoryName = product.Category.split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
     breadcrumb.textContent = categoryName;
   }
-  
+
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =
     product.NameWithoutBrand;
