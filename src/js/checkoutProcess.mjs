@@ -14,24 +14,24 @@ const checkoutProcess = {
     this.calculateItemSummary();
   },
   calculateItemSummary: function () {
-    const cartItems = getLocalStorage("so-cart");
-
-    if (cartItems === null || cartItems.length === 0) {
-      document.querySelector(".product-list").innerHTML =
-        "<p>Your cart is empty</p>";
-    }
-
-    let total = 0;
-    for (const item of cartItems) {
-      total += item.FinalPrice * item.quantity;
-    }
+    const cartItems = this.list || [];
 
     let quantity = 0;
+    let subtotal = 0;
+
     for (const item of cartItems) {
-      quantity += item.quantity;
+      const itemQuantity = item.quantity ?? 1;
+
+      quantity += itemQuantity;
+      subtotal += item.FinalPrice * itemQuantity;
     }
 
-    re;
+    this.itemTotal = subtotal;
+
+    document.querySelector("#itemSubtotal").innerHTML = `
+        <span>Item Subtotal (${quantity})</span>
+        <span>$${subtotal.toFixed(2)}</span>
+    `;
   },
   calculateOrdertotal: function () {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
