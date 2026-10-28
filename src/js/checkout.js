@@ -1,4 +1,4 @@
-import { loadHeaderFooter } from "./utils.mjs";
+/*import { loadHeaderFooter } from "./utils.mjs";
 import checkoutProcess from "./checkoutProcess.mjs";
 
 checkoutProcess.init("so-cart", "#orderSummary");
@@ -15,18 +15,24 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error("Checkout failed:", error);
   }
+});*/
+import { loadHeaderFooter } from "./utils.mjs";
+import checkoutProcess from "./checkoutProcess.mjs";
+
+loadHeaderFooter();
+
+checkoutProcess.init("so-cart", "#orderSummary");
+
+document
+  .querySelector("#zip")
+  .addEventListener(
+    "blur",
+    checkoutProcess.calculateOrdertotal.bind(checkoutProcess),
+  );
+
+// this is how it would look if we listen for the submit on the form
+document.forms["checkout"].addEventListener("submit", (e) => {
+  e.preventDefault();
+  // e.target would contain our form in this case
+  checkoutProcess.checkout(e.target);
 });
-//checkoutProcess.init("so-cart", ".products");
-//loadHeaderFooter();
-
-//document.querySelector("#zip-code").addEventListener("change", (event) => {
-//  if (event.target.validity.valid && event.target.value.trim() !== "") {
-//    checkoutProcess.calculateOrdertotal();
-//  }
-//});
-
-//document.querySelector("form").addEventListener("submit", async (event) => {
-//  event.preventDefault();
-//  checkoutProcess.calculateOrdertotal();
-//  await checkoutProcess.checkout(event.currentTarget);
-//});

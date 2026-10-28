@@ -6,12 +6,6 @@ function convertToJson(res) {
   }
 }
 
-// export function getData(category = "tents") {
-//   return fetch(`../json/${category}.json`)
-//     .then(convertToJson)
-//     .then((data) => data);
-// }
-
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 export async function getProductsByCategory(category) {
@@ -43,10 +37,14 @@ export async function checkout(payload) {
     body: JSON.stringify(payload),
   };
 
-  const response = await fetch(
-    "https://server-nodejs.cit.byui.edu:3000/checkout",
+  /*const response = await fetch(
+    "https://server-nodejs.cit.byui.edu:3000/checkout/",
     options,
   );
 
-  return convertToJson(response);
+  return convertToJson(response);*/
+  return await fetch(
+    "https://server-nodejs.cit.byui.edu:3000/checkout/",
+    options,
+  ).then(convertToJson);
 }
