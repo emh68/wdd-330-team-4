@@ -1,18 +1,18 @@
 <!doctype html>
 
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Checkout</title>
 
-  <title>Sleep Outside | Checkout</title>
-
-  <link rel="stylesheet" href="/css/style.css" />
-  <script src="../js/checkout.js" type="module"></script>
-</head>
-
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+  </head>
+  <body>
+    <header id="main-header"></header>
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
@@ -111,23 +111,6 @@
         </form>
       </section>
     </main>
-
-          <label for="cc-csc">Security Code (CVV)</label>
-          <input type="text" id="cc-csc" name="card_cvv" inputmode="numeric" pattern="[0-9]{3,4}" autocomplete="cc-csc"
-            placeholder="123" required />
-        </fieldset>
-        <fieldset>
-          <legend>Order Summary</legend>
-          <p id="itemSubtotal"></p>
-          <p id="shipping"></p>
-          <p id="tax"></p>
-          <p id="total"></p>
-        </fieldset>
-      </form>
-    </section>
-  </main>
-
-  <footer id="main-footer"></footer>
-</body>
-
+    <footer id="main-footer"></footer>
+  </body>
 </html>

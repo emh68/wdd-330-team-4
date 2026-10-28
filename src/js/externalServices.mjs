@@ -26,11 +26,27 @@ export async function findProductById(id) {
   return data.Result;
 }
 
-export async function checkout(payload) {
+/*export async function checkout(payload) {
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   };
-  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+  return await fetch(baseURL + "checkout", options).then(convertToJson);
+}*/
+export async function checkout(payload) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  };
+
+  const response = await fetch(
+    "https://server-nodejs.cit.byui.edu:3000/checkout",
+    options,
+  );
+
+  return convertToJson(response);
 }
