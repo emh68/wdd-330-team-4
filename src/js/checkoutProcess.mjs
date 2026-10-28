@@ -60,7 +60,10 @@ const checkoutProcess = {
   },
 
   calculateOrdertotal: function () {
-    this.shipping = 10 + (this.list.length - 1) * 2;
+    const quantity = (this.list || []).reduce((total, item) => total + (item.quantity ?? 1), 0
+);
+
+    this.shipping = quantity > 0 ? 10 + (quantity - 1) * 2 : 0;
     this.tax = (this.itemTotal * 0.06).toFixed(2);
     this.orderTotal = (
       this.itemTotal +
@@ -72,9 +75,8 @@ const checkoutProcess = {
   displayOrderTotals: function () {
     const shipping = document.querySelector(this.outputSelector + " #shipping");
     const tax = document.querySelector(this.outputSelector + " #tax");
-    const orderTotal = document.querySelector(
-      this.outputSelector + " #orderTotal",
-    );
+    const orderTotal = document.querySelector(this.outputSelector + " #total");
+
     shipping.textContent = "$" + this.shipping.toFixed(2);
     tax.textContent = "$" + this.tax;
     orderTotal.textContent = "$" + this.orderTotal;
