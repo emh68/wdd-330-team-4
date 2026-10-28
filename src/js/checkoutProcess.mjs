@@ -77,9 +77,9 @@ const checkoutProcess = {
     const tax = document.querySelector(this.outputSelector + " #tax");
     const orderTotal = document.querySelector(this.outputSelector + " #total");
 
-    shipping.textContent = "$" + this.shipping.toFixed(2);
-    tax.textContent = "$" + this.tax;
-    orderTotal.textContent = "$" + this.orderTotal;
+    shipping.textContent = "Shpping: $" + this.shipping.toFixed(2);
+    tax.textContent = "Tax: $" + this.tax;
+    orderTotal.textContent = "Order Total: $" + this.orderTotal;
   },
   checkout: async function (form) {
     const json = formDataToJSON(form);
