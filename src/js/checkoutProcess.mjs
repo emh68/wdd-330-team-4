@@ -1,3 +1,4 @@
+import { getLocalStorage } from "./utils.mjs";
 const checkoutProcess = {
   key: "",
   outputSelector: "",
@@ -13,7 +14,24 @@ const checkoutProcess = {
     this.calculateItemSummary();
   },
   calculateItemSummary: function () {
-    // calculate and display the total amount of the items in the cart, and the number of items.
+    const cartItems = getLocalStorage("so-cart");
+
+    if (cartItems === null || cartItems.length === 0) {
+      document.querySelector(".product-list").innerHTML =
+        "<p>Your cart is empty</p>";
+    }
+
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.FinalPrice * item.quantity;
+    }
+
+    let quantity = 0;
+    for (const item of cartItems) {
+      quantity += item.quantity;
+    }
+
+    re;
   },
   calculateOrdertotal: function () {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
