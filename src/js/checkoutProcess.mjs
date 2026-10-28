@@ -1,5 +1,5 @@
 import { getLocalStorage } from "./utils.mjs";
-import { checkout } from "./externalService.mjs";
+import { checkout } from "./externalServices.mjs";
 
 function formDataToJSON(formElement) {
   const formData = new FormData(formElement),
@@ -62,16 +62,22 @@ const checkoutProcess = {
   calculateOrdertotal: function () {
     this.shipping = 10 + (this.list.length - 1) * 2;
     this.tax = (this.itemTotal * 0.06).toFixed(2);
-    this.orderTotal = ((this.itemTotal) + (this.shipping) + parseFloat(this.tax)).toFixed(2);
+    this.orderTotal = (
+      this.itemTotal +
+      this.shipping +
+      parseFloat(this.tax)
+    ).toFixed(2);
     this.displayOrderTotals();
   },
   displayOrderTotals: function () {
-   const shipping = document.querySelector(this.outputSelector + " #shipping");
-   const tax = document.querySelector(this.outputSelector + " #tax");
-   const orderTotal = document.querySelector(this.outputSelector + " #orderTotal");
-   shipping.textContent = "$" + this.shipping.toFixed(2);
-   tax.textContent = "$" + this.tax;
-   orderTotal.textContent = "$" + this.orderTotal;
+    const shipping = document.querySelector(this.outputSelector + " #shipping");
+    const tax = document.querySelector(this.outputSelector + " #tax");
+    const orderTotal = document.querySelector(
+      this.outputSelector + " #orderTotal",
+    );
+    shipping.textContent = "$" + this.shipping.toFixed(2);
+    tax.textContent = "$" + this.tax;
+    orderTotal.textContent = "$" + this.orderTotal;
   },
   checkout: async function (form) {
     const json = formDataToJSON(form);
