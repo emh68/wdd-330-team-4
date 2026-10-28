@@ -18,6 +18,77 @@
     <main class="divider">
       <section class="products">
         <h2>Review & Place your Order</h2>
+        <form method="post" action="">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label for="firstName">
+              First Name
+              <input type="text" id="firstName" name="firstName" required />
+            </label>
+            <label for="lastName">
+              Last Name
+              <input type="text" id="lastName" name="lastName" required />
+            </label>
+            <label for="street">
+              Street
+              <input type="text" id="street" name="street" required />
+            </label>
+            <label for="city">
+              City
+              <input type="text" id="city" name="city" required />
+            </label>
+            <label for="state">
+              State
+              <input type="text" id="state" name="state" required />
+            </label>
+            <label for="zip-code">ZIP Code</label>
+            <input
+              type="text"
+              id="zip-code"
+              name="zip_code"
+              inputmode="numeric"
+              pattern="[0-9]{5}(-[0-9]{4})?"
+              placeholder="12345"
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="cc-number">Card Number</label>
+            <input
+              type="text"
+              id="cc-number"
+              name="card_number"
+              inputmode="numeric"
+              pattern="[0-9]{13,19}"
+              autocomplete="cc-number"
+              placeholder="•••• •••• •••• ••••"
+              required
+            />
+            <label for="cc-exp">Expiration Date</label>
+            <input
+              type="text"
+              id="cc-exp"
+              name="card_expiry"
+              inputmode="numeric"
+              pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
+              autocomplete="cc-exp"
+              placeholder="MM/YY"
+              required
+            />
+
+            <label for="cc-csc">Security Code (CVV)</label>
+            <input
+              type="text"
+              id="cc-csc"
+              name="card_cvv"
+              inputmode="numeric"
+              pattern="[0-9]{3,4}"
+              autocomplete="cc-csc"
+              placeholder="123"
+              required
+            />
+          </fieldset>
+        </form>
       </section>
     </main>
 
