@@ -227,6 +227,19 @@ button {
   color: var(--dark-grey);
 }
 
+/* Product-Details */
+#productRetailPrice {
+  text-decoration: line-through;
+}
+
+#discountPercentage {
+  color: green;
+}
+
+#productFinalPrice {
+  font-weight: bold;
+}
+
 @keyframes cartJump {
   0% {
     transform: translateY(0);

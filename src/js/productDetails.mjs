@@ -1,6 +1,7 @@
 import { getLocalStorage, setLocalStorage } from "./utils.mjs";
 import { findProductById } from "./productData.mjs";
 import { cartSuperscript } from "./cartSuperscript.mjs";
+import { calculateDiscount } from "./discount.mjs";
 
 let product = {};
 
@@ -40,6 +41,7 @@ async function addToCartHandler(e) {
 
 function renderProductDetails(product) {
   const breadcrumb = document.querySelector(".breadcrumbs");
+  const discountPercentage = calculateDiscount(product);
 
   if (breadcrumb) {
     const categoryName = product.Category.split("-")
@@ -53,7 +55,12 @@ function renderProductDetails(product) {
     product.NameWithoutBrand;
   document.querySelector("#productImage").src = product.Images.PrimaryLarge;
   document.querySelector("#productImage").alt = product.Name;
-  document.querySelector("#productFinalPrice").innerText = product.FinalPrice;
+  document.querySelector("#productRetailPrice").innerText =
+    `$${product.SuggestedRetailPrice}`;
+  document.querySelector("#discountPercentage").innerText =
+    `${discountPercentage}% Discount`;
+  document.querySelector("#productFinalPrice").innerText =
+    `$${product.FinalPrice}`;
   document.querySelector("#productColorName").innerText =
     product.Colors[0].ColorName;
   document.querySelector("#productDescriptionHtmlSimple").innerHTML =
