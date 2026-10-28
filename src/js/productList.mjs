@@ -1,4 +1,4 @@
-import { getData } from "./productData.mjs";
+import { getProductsByCategory } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -17,12 +17,15 @@ export default async function productList(selector, category) {
   // get the element we will insert the list into from the selector
   const el = document.querySelector(selector);
   // get the list of products
-  const products = await getData(category);
+  const products = await getProductsByCategory(category);
   // render out the product list to the element
 
   const breadcrumb = document.querySelector(".breadcrumbs");
   if (breadcrumb) {
-    const categoryName = category.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+    const categoryName = category
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
 
     breadcrumb.textContent = `${categoryName} (${products.length} items)`;
   }
