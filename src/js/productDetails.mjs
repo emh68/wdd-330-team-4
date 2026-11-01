@@ -53,8 +53,17 @@ function renderProductDetails(product) {
   document.querySelector("#productName").innerText = product.Brand.Name;
   document.querySelector("#productNameWithoutBrand").innerText =
     product.NameWithoutBrand;
-  document.querySelector("#productImage").src = product.Images.PrimaryLarge;
-  document.querySelector("#productImage").alt = product.Name;
+
+  const productImage = document.querySelector("#productImage");
+  productImage.src = product.Images.PrimaryLarge;
+  productImage.srcset = `
+    ${product.Images.PrimaryMedium} 160w,
+    ${product.Images.PrimaryLarge} 320w,
+    ${product.Images.PrimaryExtraLarge} 600w
+  `;
+  productImage.sizes = "(max-width: 532px) calc(100vw - 64px), 500px";
+  productImage.alt = product.Name;
+
   document.querySelector("#productRetailPrice").innerText =
     `$${product.SuggestedRetailPrice}`;
   document.querySelector("#discountPercentage").innerText =
