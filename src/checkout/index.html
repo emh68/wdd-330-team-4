@@ -1,76 +1,116 @@
 <!doctype html>
 
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Checkout</title>
 
-  <title>Sleep Outside | Checkout</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+  </head>
+  <body>
+    <header id="main-header"></header>
+    <main class="divider">
+      <section class="products">
+        <h2>Review & Place your Order</h2>
+        <form method="post" action="" name="checkout">
+          <fieldset>
+            <legend>Shipping</legend>
+            <label for="fname">
+              First Name
+              <input type="text" id="fname" name="fname" required />
+            </label>
+            <label for="lname">
+              Last Name
+              <input type="text" id="lname" name="lname" required />
+            </label>
+            <label for="street">
+              Street
+              <input type="text" id="street" name="street" required />
+            </label>
+            <label for="city">
+              City
+              <input type="text" id="city" name="city" required />
+            </label>
+            <label for="state">
+              State
+              <input type="text" id="state" name="state" required />
+            </label>
+            <label for="zip">ZIP Code</label>
+            <input
+              type="text"
+              id="zip"
+              name="zip"
+              inputmode="numeric"
+              pattern="[0-9]{5}(-[0-9]{4})?"
+              placeholder="12345"
+              required
+            />
+          </fieldset>
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              inputmode="numeric"
+              pattern="[0-9]{13,19}"
+              autocomplete="cc-number"
+              placeholder="•••• •••• •••• ••••"
+              required
+            />
+            <label for="expiration">Expiration Date</label>
+            <input
+              type="text"
+              id="expiration"
+              name="expiration"
+              inputmode="numeric"
+              pattern="(0?[1-9]|1[0-2])/([0-9]{2})"
+              autocomplete="cc-exp"
+              placeholder="MM/YY"
+              required
+            />
 
-  <link rel="stylesheet" href="/css/style.css" />
-  <script src="../js/checkout.js" type="module"></script>
-</head>
+            <label for="code">Security Code (CVV)</label>
+            <input
+              type="text"
+              id="code"
+              name="code"
+              inputmode="numeric"
+              pattern="[0-9]{3,4}"
+              autocomplete="cc-csc"
+              placeholder="123"
+              required
+            />
+          </fieldset>
+          <fieldset id="orderSummary">
+            <legend>Order Summary</legend>
 
-<body>
-  <header class="divider" id="main-header"></header>
+            <p id="itemSubtotal"></p>
 
-  <main class="divider">
-    <section class="products">
-      <h2>Review & Place your Order</h2>
-      <form method="post" action="">
-        <fieldset>
-          <legend>Shipping</legend>
-          <label for="firstName">
-            First Name
-            <input type="text" id="firstName" name="firstName" required />
-          </label>
-          <label for="lastName">
-            Last Name
-            <input type="text" id="lastName" name="lastName" required />
-          </label>
-          <label for="street">
-            Street
-            <input type="text" id="street" name="street" required />
-          </label>
-          <label for="city">
-            City
-            <input type="text" id="city" name="city" required />
-          </label>
-          <label for="state">
-            State
-            <input type="text" id="state" name="state" required />
-          </label>
-          <label for="zip-code">ZIP Code</label>
-          <input type="text" id="zip-code" name="zip_code" inputmode="numeric" pattern="[0-9]{5}(-[0-9]{4})?"
-            placeholder="12345" />
-        </fieldset>
-        <fieldset>
-          <legend>Payment</legend>
-          <label for="cc-number">Card Number</label>
-          <input type="text" id="cc-number" name="card_number" inputmode="numeric" pattern="[0-9]{13,19}"
-            autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required />
-          <label for="cc-exp">Expiration Date</label>
-          <input type="text" id="cc-exp" name="card_expiry" inputmode="numeric" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})"
-            autocomplete="cc-exp" placeholder="MM/YY" required />
+            <p>
+              <span>Shipping Estimate</span>
+              <span id="shipping"></span>
+            </p>
 
-          <label for="cc-csc">Security Code (CVV)</label>
-          <input type="text" id="cc-csc" name="card_cvv" inputmode="numeric" pattern="[0-9]{3,4}" autocomplete="cc-csc"
-            placeholder="123" required />
-        </fieldset>
-        <fieldset>
-          <legend>Order Summary</legend>
-          <p id="itemSubtotal"></p>
-          <p id="shipping"></p>
-          <p id="tax"></p>
-          <p id="total"></p>
-        </fieldset>
-      </form>
-    </section>
-  </main>
+            <p>
+              <span>Tax</span>
+              <span id="tax"></span>
+            </p>
 
-  <footer id="main-footer"></footer>
-</body>
-
+            <p>
+              <strong>Order Total</strong>
+              <strong id="orderTotal"></strong>
+            </p>
+          </fieldset>
+          <button type="submit" id="checkoutSubmit">Checkout</button>
+        </form>
+      </section>
+    </main>
+    <footer id="main-footer"></footer>
+  </body>
 </html>

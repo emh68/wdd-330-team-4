@@ -37,6 +37,7 @@ const checkoutProcess = {
     this.outputSelector = outputSelector;
     this.list = getLocalStorage(key);
     this.calculateItemSummary();
+    this.calculateOrdertotal();
   },
   calculateItemSummary: function () {
     const cartItems = this.list || [];
@@ -60,8 +61,10 @@ const checkoutProcess = {
   },
 
   calculateOrdertotal: function () {
-    const quantity = (this.list || []).reduce((total, item) => total + (item.quantity ?? 1), 0
-);
+    const quantity = (this.list || []).reduce(
+      (total, item) => total + (item.quantity ?? 1),
+      0,
+    );
 
     this.shipping = quantity > 0 ? 10 + (quantity - 1) * 2 : 0;
     this.tax = (this.itemTotal * 0.06).toFixed(2);
@@ -75,10 +78,12 @@ const checkoutProcess = {
   displayOrderTotals: function () {
     const shipping = document.querySelector(this.outputSelector + " #shipping");
     const tax = document.querySelector(this.outputSelector + " #tax");
-    const orderTotal = document.querySelector(this.outputSelector + " #total");
+    const orderTotal = document.querySelector(
+      this.outputSelector + " #orderTotal",
+    );
 
     shipping.textContent = "Shpping: $" + this.shipping.toFixed(2);
-    tax.textContent = "Tax: $" + this.tax;
+    tax.textContent = "$" + this.tax;
     orderTotal.textContent = "Order Total: $" + this.orderTotal;
   },
   checkout: async function (form) {

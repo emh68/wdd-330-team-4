@@ -6,12 +6,6 @@ function convertToJson(res) {
   }
 }
 
-// export function getData(category = "tents") {
-//   return fetch(`../json/${category}.json`)
-//     .then(convertToJson)
-//     .then((data) => data);
-// }
-
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 export async function getProductsByCategory(category) {
@@ -29,8 +23,10 @@ export async function findProductById(id) {
 export async function checkout(payload) {
   const options = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   };
-  return await fetch(baseURL + "checkout/", options).then(convertToJson);
+  return await fetch(baseURL + "checkout", options).then(convertToJson);
 }
