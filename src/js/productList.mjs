@@ -4,13 +4,22 @@ import { renderListWithTemplate } from "./utils.mjs";
 function productCardTemplate(product) {
   return `<li class="product-card">
             <a href="/product_pages/index.html?product=${product.Id}">
-            <img src="${product.Images.PrimaryMedium}"                
-            alt="Image of ${product.Name}"/>
-            <h3 class="card__brand">${product.Brand.Name}</h3>
-            <h2 class="card__name">${product.NameWithoutBrand}</h2>
-            <p class="product-card__price">$${product.FinalPrice}</p>
+              <img
+                src="${product.Images.PrimaryMedium}"
+                srcset="
+                  ${product.Images.PrimarySmall} 80w,
+                  ${product.Images.PrimaryMedium} 160w,
+                  ${product.Images.PrimaryLarge} 320w,
+                  ${product.Images.PrimaryExtraLarge} 600w
+                "
+                sizes="(max-width: 600px) 45vw, 250px"
+                alt="Image of ${product.Name}"
+              />
+              <h3 class="card__brand">${product.Brand.Name}</h3>
+              <h2 class="card__name">${product.NameWithoutBrand}</h2>
+              <p class="product-card__price">$${product.FinalPrice}</p>
             </a>
-        </li>`;
+          </li>`;
 }
 
 export default async function productList(selector, category) {
