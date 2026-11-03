@@ -9,7 +9,14 @@ export function cartSuperscript() {
   }
 
   let span = cart.querySelector(".cart-count");
-  const items = getLocalStorage("so-cart") || [];
+  const storedItems = getLocalStorage("so-cart");
+
+  let items;
+  if (Array.isArray(storedItems)) {
+    items = storedItems;
+  } else {
+    items = [];
+  }
 
   if (!span) {
     span = document.createElement("span");

@@ -1,4 +1,4 @@
-import { getProductsByCategory } from "./externalServices.mjs";
+import { getProductsByCategory, searchProducts } from "./externalServices.mjs";
 import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
@@ -22,21 +22,31 @@ function productCardTemplate(product) {
           </li>`;
 }
 
-export default async function productList(selector, category) {
+export default async function productList(selector, category, searchTerm) {
   // get the element we will insert the list into from the selector
   const el = document.querySelector(selector);
   // get the list of products
-  const products = await getProductsByCategory(category);
+  let products;
+
+  if (searchTerm) {
+    products = await searchProducts(searchTerm);
+  } else {
+    products = await getProductsByCategory(category);
+  }
   // render out the product list to the element
 
   const breadcrumb = document.querySelector(".breadcrumbs");
   if (breadcrumb) {
-    const categoryName = category
-      .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
+    if (searchTerm) {
+      breadcrumb.textContent = `Search results for: ${searchTerm} (${products.length} items)`;
+    } else {
+      const categoryName = category
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
 
-    breadcrumb.textContent = `${categoryName} (${products.length} items)`;
+      breadcrumb.textContent = `${categoryName} (${products.length} items)`;
+    }
   }
 
   renderListWithTemplate(productCardTemplate, el, products);
