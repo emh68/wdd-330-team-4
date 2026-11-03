@@ -49,3 +49,21 @@ export async function checkout(payload) {
   };
   return await fetch(baseURL + "checkout", options).then(convertToJson);
 }
+
+export async function registerUser(user) {
+  const response = await fetch(`${baseURL}users`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Registration failed.");
+  }
+
+  return result;
+}
