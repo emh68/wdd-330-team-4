@@ -51,3 +51,24 @@ export async function checkout(payload) {
   };
   return await fetch(baseURL + "checkout", options).then(convertToJson);
 }
+
+export async function registerUser(user) {
+  //this line connects with the server
+  const response = await fetch(`${baseURL}users`, {
+    // makes the POST (method to request to create a new user)
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    //converts your JavaScript object into JSON to send to the server.
+    body: JSON.stringify(user),
+  });
+
+  const result = await response.json(); //receives respond with info to check if server accepted the POST request
+
+  if (!response.ok) {
+    throw new Error(result.message || "Registration failed.");
+  }
+
+  return result;
+}
