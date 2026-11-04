@@ -1,4 +1,7 @@
 import { registerUser } from "../js/externalServices.mjs";
+import { loadHeaderFooter } from "../js/utils.mjs";
+
+loadHeaderFooter();
 
 const form = document.querySelector("#registration-form");
 const message = document.querySelector("#registration-message");

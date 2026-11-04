@@ -28,6 +28,7 @@ img {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 10px;
 }
 .logo {
@@ -95,6 +96,18 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+
+/* register and log in*/
+.account {
+  .button {
+    background-color: rgb(214, 240, 208);
+    border-radius: 10px;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    padding: 5px;
+  }
+}
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
