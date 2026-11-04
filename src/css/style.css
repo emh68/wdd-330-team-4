@@ -290,6 +290,16 @@ button {
   animation: cartJump 0.4s ease;
 }
 
+.discount-badge {
+  display: inline-block;
+  background-color: #b3261e;
+  color: white;
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.85em;
+}
+
 /* End cart icon styles */
 
 .mission {
