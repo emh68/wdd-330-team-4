@@ -90,3 +90,29 @@ export async function loadHeaderFooter() {
 
   cartSuperscript();
 }
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `
+  <p></p>
+  <span class="alert-close">X</span>
+`;
+alert.querySelector("p").textContent = message;
+
+  alert.addEventListener("click", function(e) {
+    if(e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  })
+
+  const main = document.querySelector("main");
+  main.prepend(alert);
+  if(scroll)
+    window.scrollTo(0,0);
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}

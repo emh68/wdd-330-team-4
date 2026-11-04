@@ -1,4 +1,4 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage, alertMessage } from "./utils.mjs";
 import { checkout } from "./externalServices.mjs";
 
 function formDataToJSON(formElement) {
@@ -94,9 +94,25 @@ const checkoutProcess = {
     json.shipping = this.shipping;
     json.items = packageItems(this.list);
     try {
-      return await checkout(json);
-    } catch (err) {
-      console.error(err);
+      // Submit the order to the server.
+      await checkout(json);
+
+      // Clear the cart after successful checkout.
+      localStorage.removeItem(this.key);
+
+      // Redirect to the success page.
+      window.location.href = "/checkout/success.html";
+      } catch (err) {
+      console.error("Checkout failed:", err);
+
+      // Display each server error as a separate alert.
+      if (err.name === "servicesError") {
+        Object.values(err.message).forEach((message) => {
+          alertMessage(message);
+        });
+      } else {
+        alertMessage(err.message || "Checkout failed.");
+      }
     }
   },
 };
