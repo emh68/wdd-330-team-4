@@ -1,7 +1,11 @@
 import { loadHeaderFooter } from "./utils.mjs";
+import alert from "./alert.mjs";
 
 async function init() {
   await loadHeaderFooter();
+
+  const alerts = new alert();
+  await alerts.init();
 }
 
 init();
