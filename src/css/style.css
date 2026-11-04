@@ -165,7 +165,7 @@ button {
 }
 /* End Newsletter signup classes */
 
-/* Cart icon styles */
+/* Start Cart icon styles */
 .cart {
   padding-top: 1em;
   position: relative;
@@ -367,6 +367,19 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+/* alert styles */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  background-color: var(--primary-color);
+  border: 1px solid darkorange;
+}
+.alert > p {
+  margin: 0;
 }
 
 @media screen and (min-width: 500px) {
