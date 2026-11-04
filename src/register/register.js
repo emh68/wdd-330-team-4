@@ -1,7 +1,9 @@
+import { registerUser } from "../js/externalServices.mjs";
+
 const form = document.querySelector("#registration-form");
 const message = document.querySelector("#registration-message");
 
-form.addEventListener("submit", (event) => {
+form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const formData = new FormData(form);
 
@@ -19,5 +21,18 @@ form.addEventListener("submit", (event) => {
     password: password,
   };
 
-  message.textContent = "Form validation successfull!";
+  const submitButton = form.querySelector('button[type="submit"]');
+  try {
+    submitButton.disabled = true;
+    message.textContent = "Creating you account...";
+
+    const result = await registerUser(user);
+
+    message.textContent = "Account created successfully";
+    form.reset();
+  } catch (error) {
+    message.textContent = error.message;
+  } finally {
+    submitButton.disabled = false;
+  }
 });
