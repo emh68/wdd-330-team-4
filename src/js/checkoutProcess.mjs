@@ -82,9 +82,9 @@ const checkoutProcess = {
       this.outputSelector + " #orderTotal",
     );
 
-    shipping.textContent = "Shpping: $" + this.shipping.toFixed(2);
+    shipping.textContent = "$" + this.shipping.toFixed(2);
     tax.textContent = "$" + this.tax;
-    orderTotal.textContent = "Order Total: $" + this.orderTotal;
+    orderTotal.textContent = "$" + this.orderTotal;
   },
   checkout: async function (form) {
     const json = formDataToJSON(form);
