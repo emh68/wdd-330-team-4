@@ -22,7 +22,7 @@ function renderCartContents() {
   }
 
   const cartTotal = document.querySelector(".cart-total");
-  cartTotal.textContent = `Total: $${total}`;
+  cartTotal.textContent = `Total: $${total.toFixed(2)}`;
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
@@ -38,8 +38,12 @@ function removeProduct(event) {
   const clickedX = event.target;
   const productId = clickedX.dataset.id;
   const cartItems = getLocalStorage("so-cart");
-
-  const itemIndex = cartItems.findIndex((item) => item.Id === productId);
+  const colorCode = clickedX.dataset.color;
+  const itemIndex = cartItems.findIndex(
+    (item) =>
+      item.Id === productId &&
+      (item.selectedColor?.ColorCode || "") === colorCode,
+  );
 
   cartItems.splice(itemIndex, 1);
 
@@ -52,30 +56,36 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Images.PrimarySmall}"
+      src="${
+        item.selectedColor?.ColorPreviewImageSrc || item.Images.PrimaryMedium
+      }"
       alt="${item.Name}"
     />
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
   </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
+  <p class="cart-card__color">${item.selectedColor?.ColorName || ""}</p>
   <div class="cart-card__quantity">
-    <button class="quantity-decrease" data-id="${item.Id}">-</button>
+    <button class="quantity-decrease" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">-</button>
     <span>Quantity: ${item.quantity || 1}</span>
-    <button class="quantity-increase" data-id="${item.Id}">+</button>
+    <button class="quantity-increase" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">+</button>
   </div>
-  <p class="cart-card__price">$${item.FinalPrice * item.quantity.toFixed(2)}</p>
-  <span class="cart-remove" data-id="${item.Id}">X</span>
+  <p class="cart-card__price">$${(item.FinalPrice * item.quantity).toFixed(2)}</p>
+  <span class="cart-remove" data-id="${item.Id}" data-color="${item.selectedColor?.ColorCode || ""}">X</span>
 </li>`;
 
   return newItem;
 }
 
-function updateProductQuantity(productId, change) {
+function updateProductQuantity(productId, colorCode, change) {
   const cartItems = getLocalStorage("so-cart") || [];
 
-  const product = cartItems.find((item) => item.Id === productId);
+  const product = cartItems.find(
+    (item) =>
+      item.Id === productId &&
+      (item.selectedColor?.ColorCode || "") === colorCode,
+  );
 
   if (!product) return;
 
@@ -97,11 +107,19 @@ function handleQuantityChange(event) {
   const decreaseButton = event.target.closest(".quantity-decrease");
 
   if (increaseButton) {
-    updateProductQuantity(increaseButton.dataset.id, 1);
+    updateProductQuantity(
+      increaseButton.dataset.id,
+      increaseButton.dataset.color,
+      1,
+    );
   }
 
   if (decreaseButton) {
-    updateProductQuantity(decreaseButton.dataset.id, -1);
+    updateProductQuantity(
+      decreaseButton.dataset.id,
+      decreaseButton.dataset.color,
+      -1,
+    );
   }
 }
 

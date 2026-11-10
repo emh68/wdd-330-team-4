@@ -4,6 +4,7 @@ import { cartSuperscript } from "./cartSuperscript.mjs";
 import { calculateDiscount } from "./discount.mjs";
 
 let product = {};
+let selectedColor = null;
 
 function addProductToCart(product) {
   const cart = getLocalStorage("so-cart");
@@ -13,7 +14,11 @@ function addProductToCart(product) {
     newArray.push(product);
     setLocalStorage("so-cart", newArray);
   } else {
-    const existingProduct = findProductInCart(cart, product.Id);
+    const existingProduct = findProductInCart(
+      cart,
+      product.Id,
+      product.selectedColor?.ColorCode,
+    );
 
     if (existingProduct) {
       existingProduct.quantity = (existingProduct.quantity || 1) + 1;
@@ -29,13 +34,17 @@ function addProductToCart(product) {
   console.log(cart);
 }
 
-function findProductInCart(cart, productId) {
-  return cart.find((item) => item.Id === productId);
+function findProductInCart(cart, productId, colorCode) {
+  return cart.find(
+    (item) =>
+      item.Id === productId && item.selectedColor?.ColorCode === colorCode,
+  );
 }
 
 // add to cart button event handler
 async function addToCartHandler(e) {
   const product = await findProductById(e.target.dataset.id);
+  product.selectedColor = selectedColor || product.Colors[0];
   addProductToCart(product);
 }
 
@@ -75,6 +84,37 @@ function renderProductDetails(product) {
   document.querySelector("#productDescriptionHtmlSimple").innerHTML =
     product.DescriptionHtmlSimple;
   document.querySelector("#addToCart").dataset.id = product.Id;
+  selectedColor = product.Colors[0];
+  renderColorOptions(product);
+}
+
+function renderColorOptions(product) {
+  const container = document.querySelector("#colorOptions");
+  container.innerHTML = "";
+  if (!product.Colors || product.Colors.length <= 1) return;
+
+  product.Colors.forEach((color, index) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "color-swatch";
+    btn.title = color.ColorName;
+    btn.setAttribute("aria-pressed", index === 0);
+    btn.innerHTML = `<img src="${color.ColorChipImageSrc}" alt="${color.ColorName}" />`;
+
+    btn.addEventListener("click", () => {
+      const productImage = document.querySelector("#productImage");
+      productImage.removeAttribute("srcset");
+      productImage.src = color.ColorPreviewImageSrc;
+
+      document.querySelector("#productColorName").innerText = color.ColorName;
+      container
+        .querySelectorAll("button")
+        .forEach((b) => b.setAttribute("aria-pressed", "false"));
+      btn.setAttribute("aria-pressed", "true");
+      selectedColor = color;
+    });
+    container.appendChild(btn);
+  });
 }
 
 // cart animation when user add a product to cart
