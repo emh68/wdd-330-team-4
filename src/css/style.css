@@ -293,6 +293,46 @@ button {
 #productRetailPrice {
   text-decoration: line-through;
 }
+/* color swatches on product details page */
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.color-swatch {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid var(--light-grey);
+  border-radius: 4px;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.color-swatch img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.color-swatch:hover {
+  border-color: var(--tertiary-color);
+}
+
+.color-swatch:focus-visible {
+  outline: 3px solid var(--tertiary-color);
+  outline-offset: 2px;
+}
+
+/* the selected swatch */
+.color-swatch[aria-pressed="true"] {
+  border-color: var(--dark-grey);
+  border-width: 3px;
+}
 
 #discountPercentage {
   color: green;
@@ -328,6 +368,28 @@ button {
   border-radius: 4px;
   font-weight: bold;
   font-size: 0.85em;
+}
+
+.image-options:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.product-detail .image-options img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  padding: 0;
+}
+
+.image-options button {
+  background-color: transparent;
+  padding: 5px;
+  margin: 0;
+  border: 1px solid black;
 }
 
 /* End cart icon styles */
