@@ -5,6 +5,16 @@ import { calculateDiscount } from "./discount.mjs";
 
 let product = {};
 
+function addToWishList(favorite) {
+  const wishlist = getLocalStorage("so-wishlist") || [];
+  const alreadySaved = wishlist.some((item) => item.Id === favorite.Id);
+
+  if (!alreadySaved) {
+    wishlist.push(favorite);
+    setLocalStorage("so-wishlist", wishlist);
+  }
+}
+
 function addProductToCart(product) {
   const cart = getLocalStorage("so-cart");
   if (!cart) {
@@ -107,6 +117,10 @@ export default async function productDetails(productId) {
     document
       .getElementById("addToCart")
       .addEventListener("click", addToCartHandler);
+
+    document.getElementById("addToWishList").addEventListener("click", () => {
+      addToWishList(product);
+    });
   } catch (err) {
     productSection.innerHTML = `<p>${err.message}</p>`;
     productSection.hidden = false;

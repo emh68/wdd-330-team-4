@@ -22,7 +22,7 @@ function renderCartContents() {
   }
 
   const cartTotal = document.querySelector(".cart-total");
-  cartTotal.textContent = `Total: $${total}`;
+  cartTotal.textContent = `Total: $${total.toFixed(2)}`;
 
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
@@ -65,7 +65,7 @@ function cartItemTemplate(item) {
     <span>Quantity: ${item.quantity || 1}</span>
     <button class="quantity-increase" data-id="${item.Id}">+</button>
   </div>
-  <p class="cart-card__price">$${item.FinalPrice * item.quantity.toFixed(2)}</p>
+  <p class="cart-card__price">$${(item.FinalPrice * item.quantity).toFixed(2)}</p>
   <span class="cart-remove" data-id="${item.Id}">X</span>
 </li>`;
 
