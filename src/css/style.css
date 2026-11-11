@@ -573,6 +573,60 @@ body:has(.cart-footer) .cart-card {
   border-radius: 4px;
 }
 
+/*Recommendation Section */
+.recommendations {
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.recommendations h2 {
+  margin-bottom: 1rem;
+}
+
+#recommendedProducts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#recommendedProducts .product-card {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+
+#recommendedProducts a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 1rem;
+  border-radius: inherit;
+  color: var(--dark-grey);
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#recommendedProducts img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+#recommendedProducts a:hover,
+#recommendedProducts a:focus-visible {
+  background-color: #f8f8f5;
+  outline: 2px solid var(--secondary-color);
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
