@@ -114,6 +114,31 @@ function renderProductDetails(product) {
     imageOptions.hidden = false;
   }
 
+  const commentForm = document.querySelector("#commentForm");
+  const commentText = document.querySelector("#commentText");
+  const commentKey = "so-comments-" + product.Id;
+  const comments = getLocalStorage(commentKey) || [];
+  const list = document.querySelector("#commentList");
+  comments.forEach((comment) => {
+    const entry = document.createElement("li");
+    entry.textContent = comment;
+    list.appendChild(entry);
+  });
+
+  commentForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = commentText.value.trim();
+    if (text === "") {
+      return;
+    }
+    comments.push(text);
+    setLocalStorage(commentKey, comments);
+    const entry = document.createElement("li");
+    entry.textContent = text;
+    list.appendChild(entry);
+    commentText.value = "";
+  });
+
   document.querySelector("#productRetailPrice").innerText =
     `$${product.SuggestedRetailPrice}`;
   document.querySelector("#discountPercentage").innerText =

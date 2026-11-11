@@ -573,6 +573,74 @@ body:has(.cart-footer) .cart-card {
   border-radius: 4px;
 }
 
+/* Product Comments */
+.commentSection {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+}
+
+.commentSection h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.4rem;
+}
+
+#commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#commentForm label {
+  font-weight: bold;
+}
+
+#commentText {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 120px;
+  padding: 0.85rem;
+  font: inherit;
+  line-height: 1.5;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+#commentText:focus {
+  outline: 2px solid var(--primary-color, #525b0f);
+  outline-offset: 2px;
+}
+
+#commentForm button {
+  align-self: flex-end;
+  width: auto;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#commentList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#commentList li {
+  padding: 1rem;
+  line-height: 1.6;
+  background: #f7f7f5;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+/* Commment section ended */
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
