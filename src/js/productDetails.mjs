@@ -6,6 +6,16 @@ import { calculateDiscount } from "./discount.mjs";
 let product = {};
 let selectedColor = null;
 
+function addToWishList(favorite) {
+  const wishlist = getLocalStorage("so-wishlist") || [];
+  const alreadySaved = wishlist.some((item) => item.Id === favorite.Id);
+
+  if (!alreadySaved) {
+    wishlist.push(favorite);
+    setLocalStorage("so-wishlist", wishlist);
+  }
+}
+
 function addProductToCart(product) {
   const cart = getLocalStorage("so-cart");
   if (!cart) {
@@ -72,6 +82,37 @@ function renderProductDetails(product) {
   `;
   productImage.sizes = "(max-width: 532px) calc(100vw - 64px), 500px";
   productImage.alt = product.Name;
+
+  const imageOptions = document.querySelector("#imageOptions");
+  const extraImages = product.Images.ExtraImages;
+
+  if (extraImages?.length > 0) {
+    const allImages = [
+      {
+        Title: product.Name,
+        Src: product.Images.PrimaryLarge,
+      },
+      ...extraImages,
+    ];
+
+    allImages.forEach((image) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      const thumbnail = document.createElement("img");
+      thumbnail.src = image.Src;
+      thumbnail.alt = image.Title;
+      button.appendChild(thumbnail);
+
+      button.addEventListener("click", () => {
+        productImage.removeAttribute("srcset");
+        productImage.src = image.Src;
+        productImage.alt = image.Title;
+      });
+
+      imageOptions.appendChild(button);
+    });
+    imageOptions.hidden = false;
+  }
 
   document.querySelector("#productRetailPrice").innerText =
     `$${product.SuggestedRetailPrice}`;
@@ -178,6 +219,10 @@ export default async function productDetails(productId) {
       .getElementById("addToCart")
       .addEventListener("click", addToCartHandler);
     await renderRecommendations(product);
+
+    document.getElementById("addToWishList").addEventListener("click", () => {
+      addToWishList(product);
+    });
   } catch (err) {
     productSection.innerHTML = `<p>${err.message}</p>`;
     productSection.hidden = false;
