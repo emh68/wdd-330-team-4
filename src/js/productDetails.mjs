@@ -129,6 +129,18 @@ async function animateCart() {
     { once: true },
   );
 }
+async function renderRecommendations(currentProduct) {
+  const products = await getProductsByCategory(currentProduct.Category);
+  const candidates = products.filter((item) => item.Id !== currentProduct.Id);
+  const recommendations = [];
+  const count = Math.min(3, candidates.length);
+
+  while (count > recommendations.length) {
+    const randomIndex = Math.floor(Math.random() * candidates.length);
+    const selectedProduct = candidates.splice(randomIndex, 1)[0];
+    recommendations.push(selectedProduct);
+  }
+}
 
 export default async function productDetails(productId) {
   const productSection = document.querySelector(".product-detail");
