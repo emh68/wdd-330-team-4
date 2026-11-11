@@ -20,6 +20,15 @@
         <option value="desc">Price: High to Low</option>
       </select>
       <ul class="product-list"></ul>
+      <dialog id="quickView" aria-labelledby="quickViewTitle">
+        <h2 id="quickViewTitle">Product Details</h2>
+        <img src="" alt="" id="quickViewImage" />
+        <p id="quickViewPrice"></p>
+        <p id="quickViewDescription"></p>
+        <form method="dialog">
+          <button type="submit">Close</button>
+        </form>
+      </dialog>
     </main>
 
     <footer id="main-footer"></footer>
