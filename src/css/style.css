@@ -385,6 +385,28 @@ button {
   padding: 0;
 }
 
+.product-detail {
+  padding: 1em;
+  max-width: 500px;
+  margin: auto;
+}
+
+.product-detail img {
+  width: 100%;
+}
+
+.product-detail__add {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.product-detail__add > button {
+  margin: 0;
+  padding: 0.6rem 1rem;
+}
+
 .image-options button {
   background-color: transparent;
   padding: 5px;
@@ -467,16 +489,6 @@ label[for="sortProduct"] {
   font-size: 1em;
 }
 /* End product list card */
-
-.product-detail {
-  padding: 1em;
-  max-width: 500px;
-  margin: auto;
-}
-
-.product-detail img {
-  width: 100%;
-}
 
 /* Start cart list card styles */
 .cart-card {
@@ -572,6 +584,79 @@ body:has(.cart-footer) .cart-card {
   text-align: center;
   border-radius: 4px;
 }
+
+/* Quick View Settings */
+#quickView {
+  box-sizing: border-box;
+  width: min(92vw, 440px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  color: var(--dark-grey);
+  background: white;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+}
+
+#quickView::backdrop {
+  background: rgb(0 0 0 / 80%);
+}
+
+#quickViewTitle {
+  margin: 0 0 1.5rem;
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+#quickViewImage {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  margin: 0 auto 1.5rem;
+}
+
+#quickViewPrice {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#quickViewDescription {
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+#quickView form {
+  margin-top: 1.5rem;
+}
+
+#quickView button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem;
+  font: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+#quickView button:hover {
+  filter: brightness(0.9);
+}
+
+#quickView button:focus-visible {
+  outline: 3px solid var(--dark-grey);
+  outline-offset: 3px;
+}
+
+/* Quick View Section Ended */
 
 @media screen and (min-width: 500px) {
   body {
