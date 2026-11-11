@@ -342,6 +342,36 @@ button {
 
 /* End cart icon styles */
 
+/* Sort Product CSS */
+label[for="sortProduct"] {
+  display: inline-block;
+  margin: 1rem 0.75rem 1rem 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#sortProduct {
+  padding: 0.5rem;
+  font: inherit;
+  color: var(--dark-grey);
+  background-color: #f8f8f8;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 3rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23303030' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: 8px 5px;
+  background-position: right 0.5rem center;
+}
+
+#sortProduct:focus-visible {
+  outline: 1px solid var(--secondary-color);
+  outline-offset: 2px;
+}
+/* end of Sort Product */
+
 .mission {
   padding: 0 0.5em;
   /* margin: 0.5em 0; */

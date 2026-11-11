@@ -30,6 +30,9 @@ export default async function productList(selector, category, searchTerm) {
   // get the element we will insert the list into from the selector
   const el = document.querySelector(selector);
   // get the list of products
+
+  const sortSelect = document.querySelector("#sortProduct");
+
   let products;
 
   if (searchTerm) {
@@ -54,4 +57,22 @@ export default async function productList(selector, category, searchTerm) {
   }
 
   renderListWithTemplate(productCardTemplate, el, products);
+  sortSelect.addEventListener("change", () => {
+    const sortedProducts = [...products];
+
+    if (sortSelect.value === "name") {
+      sortedProducts.sort((firstProduct, secondProduct) => {
+        return firstProduct.Name.localeCompare(secondProduct.Name);
+      });
+    } else if (sortSelect.value === "desc") {
+      sortedProducts.sort((firstProduct, secondProduct) => {
+        return secondProduct.FinalPrice - firstProduct.FinalPrice;
+      });
+    } else if (sortSelect.value === "asc") {
+      sortedProducts.sort((firstProduct, secondProduct) => {
+        return firstProduct.FinalPrice - secondProduct.FinalPrice;
+      });
+    }
+    renderListWithTemplate(productCardTemplate, el, sortedProducts);
+  });
 }
