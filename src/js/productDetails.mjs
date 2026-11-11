@@ -140,6 +140,24 @@ async function renderRecommendations(currentProduct) {
     const selectedProduct = candidates.splice(randomIndex, 1)[0];
     recommendations.push(selectedProduct);
   }
+  const list = document.querySelector("#recommendedProducts");
+  const section = document.querySelector(".recommendations");
+
+  if (recommendations.length === 0) return;
+  recommendations.forEach((item) => {
+    const card = document.createElement("li");
+    const photo = document.createElement("img");
+    const link = document.createElement("a");
+    card.className = "product-card";
+    link.textContent = item.Name;
+    photo.src = item.Images.PrimarySmall;
+    photo.alt = "";
+    link.href = "/product_pages/index.html?product=" + item.Id;
+    list.appendChild(card);
+    link.prepend(photo);
+    card.appendChild(link);
+  });
+  section.hidden = false;
 }
 
 export default async function productDetails(productId) {
@@ -159,6 +177,7 @@ export default async function productDetails(productId) {
     document
       .getElementById("addToCart")
       .addEventListener("click", addToCartHandler);
+    await renderRecommendations(product);
   } catch (err) {
     productSection.innerHTML = `<p>${err.message}</p>`;
     productSection.hidden = false;
