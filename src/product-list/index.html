@@ -1,23 +1,28 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Home</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sleep Outside | Home</title>
-  <link rel="stylesheet" href="../css/style.css" />
-</head>
+  <body>
+    <header class="divider" id="main-header"></header>
 
-<body>
-  <header class="divider" id="main-header"></header>
+    <main class="divider">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"></nav>
+      <label for="sortProduct">Sort Products</label>
+      <select id="sortProduct">
+        <option value="default">Original</option>
+        <option value="name">Name: A - Z</option>
+        <option value="asc">Price: Low to High</option>
+        <option value="desc">Price: High to Low</option>
+      </select>
+      <ul class="product-list"></ul>
+    </main>
 
-  <main class="divider">
-    <nav class="breadcrumbs" aria-label="Breadcrumb"></nav>
-    <ul class="product-list"></ul>
-  </main>
-
-  <footer id="main-footer"></footer>
-  <script type="module" src="../js/product-list.js"></script>
-</body>
-
+    <footer id="main-footer"></footer>
+    <script type="module" src="../js/product-list.js"></script>
+  </body>
 </html>
