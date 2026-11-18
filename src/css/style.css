@@ -385,6 +385,28 @@ button {
   padding: 0;
 }
 
+.product-detail {
+  padding: 1em;
+  max-width: 500px;
+  margin: auto;
+}
+
+.product-detail img {
+  width: 100%;
+}
+
+.product-detail__add {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.product-detail__add > button {
+  margin: 0;
+  padding: 0.6rem 1rem;
+}
+
 .image-options button {
   background-color: transparent;
   padding: 5px;
@@ -467,16 +489,6 @@ label[for="sortProduct"] {
   font-size: 1em;
 }
 /* End product list card */
-
-.product-detail {
-  padding: 1em;
-  max-width: 500px;
-  margin: auto;
-}
-
-.product-detail img {
-  width: 100%;
-}
 
 /* Start cart list card styles */
 .cart-card {
@@ -626,6 +638,213 @@ body:has(.cart-footer) .cart-card {
   background-color: #f8f8f5;
   outline: 2px solid var(--secondary-color);
 }
+
+/* Quick View Settings */
+#quickView {
+  box-sizing: border-box;
+  width: min(92vw, 440px);
+/* Product Comments */
+.commentSection {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ddd;
+}
+
+.commentSection h2 {
+  margin: 0 0 1.25rem;
+  font-size: 1.4rem;
+}
+
+#commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#commentForm label {
+  font-weight: bold;
+}
+
+#commentText {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 120px;
+  padding: 0.85rem;
+  font: inherit;
+  line-height: 1.5;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+#commentText:focus {
+  outline: 2px solid var(--primary-color, #525b0f);
+  outline-offset: 2px;
+}
+
+#commentForm button {
+  align-self: flex-end;
+  width: auto;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#commentList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+#commentList li {
+  padding: 1rem;
+  line-height: 1.6;
+  background: #f7f7f5;
+  border: 1px solid #e5e5e0;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+/* Commment section ended */
+/* First-visit registration invitation */
+#registerInvitation {
+  box-sizing: border-box;
+  width: min(92vw, 460px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  color: var(--dark-grey);
+  background: white;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+}
+
+#quickView::backdrop {
+  background: rgb(0 0 0 / 80%);
+}
+
+#quickViewTitle {
+  margin: 0 0 1.5rem;
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+#quickViewImage {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  margin: 0 auto 1.5rem;
+}
+
+#quickViewPrice {
+  margin: 0;
+  padding-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#quickViewDescription {
+  margin: 1rem 0;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+#quickView form {
+  margin-top: 1.5rem;
+}
+
+#quickView button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.85rem;
+  font: inherit;
+  font-weight: bold;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+#quickView button:hover {
+  filter: brightness(0.9);
+}
+
+#quickView button:focus-visible {
+  outline: 3px solid var(--dark-grey);
+  outline-offset: 3px;
+}
+
+/* Quick View Section Ended */
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgb(0 0 0 / 35%);
+}
+
+#registerInvitation::backdrop {
+  background: rgb(0 0 0 / 75%);
+}
+
+#registerInvitationTitle {
+  margin: 0 0 1rem;
+  font-size: 1.7rem;
+  line-height: 1.25;
+}
+
+#registerInvitation p {
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+}
+
+/* Call To Action Section */
+#registerInvitation a {
+  display: block;
+  padding: 0.85rem 1rem;
+  color: white;
+  background: #525b0f;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#registerInvitation a:hover {
+  background: #41490c;
+}
+
+#registerInvitation form {
+  margin: 0;
+}
+
+#registerInvitation button {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  color: #555;
+  background: transparent;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font: inherit;
+  cursor: pointer;
+}
+
+#registerInvitation button:hover {
+  background: #f3f3ef;
+}
+
+#registerInvitation a:focus-visible,
+#registerInvitation button:focus-visible {
+  outline: 3px solid #525b0f;
+  outline-offset: 3px;
+}
+
+/* End Of Call To Action */
 
 @media screen and (min-width: 500px) {
   body {
