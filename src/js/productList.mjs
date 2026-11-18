@@ -23,6 +23,7 @@ function productCardTemplate(product) {
               <p class="product-card__price">$${product.FinalPrice}</p>
               ${discount > 0 ? `<p class="discount-badge">${discount}% OFF</p>` : ""}
             </a>
+            <button type="button" class="quick-view" data-id="${product.Id}">Quick View</button>
           </li>`;
 }
 
@@ -30,6 +31,29 @@ export default async function productList(selector, category, searchTerm) {
   // get the element we will insert the list into from the selector
   const el = document.querySelector(selector);
   // get the list of products
+  el.addEventListener("click", (event) => {
+    const button = event.target.closest(".quick-view");
+    if (!button) {
+      return;
+    }
+    const selectedProduct = products.find(
+      (item) => item.Id === button.dataset.id,
+    );
+    if (!selectedProduct) {
+      return;
+    }
+    const dialog = document.querySelector("#quickView");
+    const title = document.querySelector("#quickViewTitle");
+    const photo = document.querySelector("#quickViewImage");
+    const price = document.querySelector("#quickViewPrice");
+    const detail = document.querySelector("#quickViewDescription");
+    photo.src = selectedProduct.Images.PrimaryMedium;
+    photo.alt = selectedProduct.Name;
+    price.textContent = "$" + selectedProduct.FinalPrice.toFixed(2);
+    detail.innerHTML = selectedProduct.DescriptionHtmlSimple;
+    title.textContent = selectedProduct.Name;
+    dialog.showModal();
+  });
 
   const sortSelect = document.querySelector("#sortProduct");
 
